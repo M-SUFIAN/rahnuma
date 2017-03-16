@@ -1,0 +1,66 @@
+<?php
+$db_name="guides_db";
+$mysql_username="root";
+$mysql_pass="root";
+$server_name="localhost";
+
+$con=mysqli_connect($server_name,$db_username,$mysql_pass,$db_name);
+
+if(!$con)
+{
+echo"connection error......".mysqli_connect_error();
+}
+else
+{
+echo"<h3>Database connected</h3>"
+}
+
+
+?>
+--------------------------------
+insert data
+------------------------------
+<?php
+require"init.php";
+$name="M.SUFIAN";
+$username="sunnykhan.msk";
+$user_pass="123123";
+
+$sql_query="insert into guide values('$name','$username','$user_pass');";
+
+if(mysqli_query($con,$sql_query))
+{
+echo"<h3>DATA INSERTED</he>";
+}
+else
+{
+
+echo"<h3>DATA Insetion failed</he>";
+}
+
+?>
+
+---------------------
+login
+---------------------
+<?php
+require"init.php";
+$username="sunnykhan.msk";
+$user_pass="123123";
+
+$sql_query="select name from guide where User_name like'$user_name'and user_pass like '$user_pass';";
+
+$result=mysqli_query($con,$sql_query);
+if(mysqli_num_rows($result)>0)
+{
+$row=mysqli_fetch_assoc($result);
+$name=$row["name"];
+echo "<h3>HELLO WELCOME".$name ."</h3>";
+}
+else
+{
+echo"no info is avaliable";
+}
+
+
+?>
